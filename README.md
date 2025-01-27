@@ -1,2 +1,2 @@
 # Shenam
-Shenam:Xonadon topuvchi mukammal loyiha.
+Shenam:Xonadon topuvchi mukammal loyiha. The-Standart.
