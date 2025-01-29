@@ -30,7 +30,7 @@ namespace Shenam.API
 
             services.AddDbContext<StorageBroker>();
             services.AddControllers();
-
+            
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc(
