@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.OpenApi.Models;
+using Shenam.API.Brokers.Storages;
 namespace Shenam.API
 {
     public class Startup
@@ -26,6 +28,7 @@ namespace Shenam.API
                 Version = "v1"
             };
 
+            services.AddDbContext<StorageBroker>();
             services.AddControllers();
 
             services.AddSwaggerGen(options =>
