@@ -18,12 +18,14 @@ namespace Shenam.API.Brokers.Storages
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string ConnectionString = 
+            string ConnectionString =
                  this.configuration.GetConnectionString(name: "DefaultConnection");
 
             optionsBuilder.UseSqlServer(ConnectionString);
         }
-        public override void Dispose(){
+        public override void Dispose()
+        {
 
+        }
     }
 }
