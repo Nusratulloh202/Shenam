@@ -10,6 +10,7 @@ namespace Shenam.API.Brokers.Storages
     public partial class StorageBroker
     {
         public DbSet<Guest> Guests { get; set; }
+        //Insert
 
         public async ValueTask<Guest> InsertGuestAsync(Guest guest)
         {
@@ -25,6 +26,7 @@ namespace Shenam.API.Brokers.Storages
         }
 
         //All Read barcha malumotlarni o'qish
+
         public  IQueryable<Guest> SelectAllGuest()
         {
             return this.Guests;
