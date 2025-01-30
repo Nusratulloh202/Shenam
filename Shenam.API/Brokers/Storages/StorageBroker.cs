@@ -1,6 +1,8 @@
-﻿using EFxceptions;
+﻿using System.Linq;
+using EFxceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Shenam.API.Models.Foundations.Guests;
 
 namespace Shenam.API.Brokers.Storages
 {
@@ -21,6 +23,7 @@ namespace Shenam.API.Brokers.Storages
 
             optionsBuilder.UseSqlServer(ConnectionString);
         }
-        public override void Dispose(){}
+        public override void Dispose(){
+
     }
 }
