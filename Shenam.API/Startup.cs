@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.OpenApi.Models;
+using Shenam.API.Brokers.Loggings;
 using Shenam.API.Brokers.Storages;
 namespace Shenam.API
 {
@@ -30,14 +30,15 @@ namespace Shenam.API
 
             services.AddDbContext<StorageBroker>();
             services.AddControllers();
-            services.AddTransient<IStorageBroker, StorageBroker>();
+            AddBrokers(services);
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc(
-                    name:"v1",
-                    info:apiInfo);
+                    name: "v1",
+                    info: apiInfo);
             });
         }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
         {
@@ -63,6 +64,11 @@ namespace Shenam.API
             app.UseEndpoints(endpoints =>
                 endpoints.MapControllers());
          
+        }
+        private static void AddBrokers(IServiceCollection services)
+        {
+            services.AddTransient<IStorageBroker, StorageBroker>();
+            services.AddTransient<ILoggingBroker, LoggingBroker>();
         }
     }
 }
