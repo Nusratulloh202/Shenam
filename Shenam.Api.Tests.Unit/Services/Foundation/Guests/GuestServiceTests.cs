@@ -2,7 +2,10 @@
 //Copyright(c) Coalition of Good-Hearted Engineers
 //Free To Use To Find Comfort and Peace
 //====================================================
+using System.Linq.Expressions;
 using Moq;
+using Xeptions;
+using Shenam.API.Brokers.Loggings;
 using Shenam.API.Brokers.Storages;
 using Shenam.API.Models.Foundations.Guests;
 using Shenam.API.Services.Foundations.Guests;
@@ -13,14 +16,18 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
     public partial class GuestServiceTests
     {
         private readonly Mock<IStorageBroker> storageBrokerMock;
+        private readonly Mock<ILoggingBroker> loggingBrokerMock;
         private readonly IGuestService guestService;
 
         public GuestServiceTests()
         {
             this.storageBrokerMock = new Mock<IStorageBroker>();
+            this.loggingBrokerMock = new Mock<ILoggingBroker>();
 
             this.guestService = 
-                new GuestService(storageBroker: this.storageBrokerMock.Object);
+                new GuestService(storageBroker: 
+                this.storageBrokerMock.Object,
+                this.loggingBrokerMock.Object);
         }
         private static Guest CreateRandomGuest() =>
            CreateGuestFiller(date:GetRandomDateTime()).Create();
@@ -29,6 +36,15 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
         private static DateTimeOffset GetRandomDateTime() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
+        private Expression<Func<Xeption,bool>> SameExceptionAs(Xeption expectedException)
+        {
+            return actualExeption=>
+                actualExeption.Message == expectedException.Message
+                && actualExeption.InnerException.Message == expectedException.InnerException.Message
+                && (actualExeption.InnerException as Xeption).DataEquals(expectedException.InnerException.Data);
+
+        }
+
         private static Filler<Guest>CreateGuestFiller(DateTimeOffset date)
         {
             var filler = new Filler<Guest>();;;
@@ -36,38 +52,5 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
                 .OnType<DateTimeOffset>().Use(date);
             return filler;
         }
-
-
-
-
-
-
-
-
-
-        //[Fact]
-        //public async Task ShoulGuestAddAsync()
-        //{
-        //    //Arrange
-        //    Guest randomGuest = new Guest
-        //    {
-        //        Id = Guid.NewGuid(),
-        //        FirstName = "Alibek",
-        //        LastName = "Aliqulov",
-        //        Address = "Bo'rijar MFY",
-        //        DateOfBirth = new DateTimeOffset(),
-        //        Gender = GenderType.Male,
-        //        PhoneNumber = "+998976349202",
-        //        Email = "Nusrat202@gamil.com"
-        //    };
-        //    this.storageBrokerMock.Setup(broker =>
-        //    broker.InsertGuestAsync(randomGuest))
-        //        .ReturnsAsync(randomGuest);
-        //    //Act
-        //    Guest actual = await this.guestService.InsertGuestAsync(randomGuest);
-
-        //    //Assert
-        //    actual.Should().BeEquivalentTo(randomGuest);
-        //}
     }
 }

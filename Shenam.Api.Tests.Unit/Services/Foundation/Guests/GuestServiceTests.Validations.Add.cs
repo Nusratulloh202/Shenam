@@ -1,4 +1,9 @@
-﻿using Shenam.API.Models.Foundations.Guests;
+//====================================================
+//Copyright(c) Coalition of Good-Hearted Engineers
+//Free To Use To Find Comfort and Peace
+//====================================================
+using Moq;
+using Shenam.API.Models.Foundations.Guests;
 using Shenam.API.Models.Foundations.Guests.Exceptions;
 
 namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
@@ -18,6 +23,19 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
             ValueTask<Guest> addGuestTask =
                 this.guestService.InsertGuestAsync(nullGuest);
             //Then
+
+            await Assert.ThrowsAsync<GuestValidationException>(() =>
+                addGuestTask.AsTask());
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(expectedGuestValidationException))),
+                    Times.Once);
+            this.storageBrokerMock.Verify(broker =>
+                broker.InsertGuestAsync(It.IsAny<Guest>()),
+                    Times.Never);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.storageBrokerMock.VerifyNoOtherCalls();
 
         }
     }

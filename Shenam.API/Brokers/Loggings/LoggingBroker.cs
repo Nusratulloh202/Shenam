@@ -23,5 +23,6 @@ namespace Shenam.API.Brokers.Loggings
 
         public void LogInformation(string message) =>
             this.logger.LogInformation(message);
+
     }
 }

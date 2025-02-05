@@ -1,4 +1,8 @@
-﻿using FluentAssertions;
+﻿//====================================================
+//Copyright(c) Coalition of Good-Hearted Engineers
+//Free To Use To Find Comfort and Peace
+//====================================================
+using FluentAssertions;
 using Force.DeepCloner;
 using Moq;
 using Shenam.API.Models.Foundations.Guests;
@@ -31,6 +35,7 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
                     Times.Once);
 
             this.storageBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
         }
     }
 }
