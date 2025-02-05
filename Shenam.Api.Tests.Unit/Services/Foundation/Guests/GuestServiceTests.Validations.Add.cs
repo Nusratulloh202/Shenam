@@ -23,7 +23,7 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
             ValueTask<Guest> addGuestTask =
                 this.guestService.InsertGuestAsync(nullGuest);
             //Then
-<<<<<<< users/Nusratulloh202/Tests-guest-servise-validations
+
             await Assert.ThrowsAsync<GuestValidationException>(() =>
                 addGuestTask.AsTask());
 
@@ -36,9 +36,7 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
 
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.storageBrokerMock.VerifyNoOtherCalls();
-=======
 
->>>>>>> main
         }
     }
 }
