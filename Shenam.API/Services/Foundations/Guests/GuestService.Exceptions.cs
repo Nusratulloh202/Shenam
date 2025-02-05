@@ -22,11 +22,6 @@ namespace Shenam.API.Services.Foundations.Guests
             }
             catch (NullGuestException nullGuestException)
             {
-                var guestValidationException =
-                    new GuestValidationException(nullGuestException);
-                loggingBroker.LogError(guestValidationException);
-
-
                 throw CreatAndLogValidationException(nullGuestException);
             }
         }
@@ -35,7 +30,7 @@ namespace Shenam.API.Services.Foundations.Guests
             var guestValidationException =
                 new GuestValidationException(exception);
 
-            this.loggingBroker.LogError(guestValidationException);
+            loggingBroker.LogError(guestValidationException);
 
             return guestValidationException;
         }
