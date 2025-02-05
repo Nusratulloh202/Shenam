@@ -6,7 +6,7 @@
 using System.Threading.Tasks;
 using Shenam.API.Models.Foundations.Guests;
 using Shenam.API.Models.Foundations.Guests.Exceptions;
-using Xeptions;
+using Xeptions; 
 
 namespace Shenam.API.Services.Foundations.Guests
 {
