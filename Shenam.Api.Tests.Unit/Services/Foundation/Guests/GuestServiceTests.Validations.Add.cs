@@ -25,6 +25,7 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
             //Then
             await Assert.ThrowsAsync<GuestValidationException>(() =>
                 addGuestTask.AsTask());
+
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(expectedGuestValidationException))),
                     Times.Once);
@@ -32,8 +33,8 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
                 broker.InsertGuestAsync(It.IsAny<Guest>()),
                     Times.Never);
 
-            this.storageBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.storageBrokerMock.VerifyNoOtherCalls();
         }
     }
 }
