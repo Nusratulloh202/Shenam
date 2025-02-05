@@ -1,4 +1,8 @@
-﻿using Moq;
+﻿//====================================================
+//Copyright(c) Coalition of Good-Hearted Engineers
+//Free To Use To Find Comfort and Peace
+//====================================================
+using Moq;
 using Shenam.API.Models.Foundations.Guests;
 using Shenam.API.Models.Foundations.Guests.Exceptions;
 
@@ -30,7 +34,6 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
 
             this.storageBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
-
         }
     }
 }

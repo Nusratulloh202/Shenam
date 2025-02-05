@@ -52,38 +52,5 @@ namespace Shenam.Api.Tests.Unit.Services.Foundation.Guests
                 .OnType<DateTimeOffset>().Use(date);
             return filler;
         }
-
-
-
-
-
-
-
-
-
-        //[Fact]
-        //public async Task ShoulGuestAddAsync()
-        //{
-        //    //Arrange
-        //    Guest randomGuest = new Guest
-        //    {
-        //        Id = Guid.NewGuid(),
-        //        FirstName = "Alibek",
-        //        LastName = "Aliqulov",
-        //        Address = "Bo'rijar MFY",
-        //        DateOfBirth = new DateTimeOffset(),
-        //        Gender = GenderType.Male,
-        //        PhoneNumber = "+998976349202",
-        //        Email = "Nusrat202@gamil.com"
-        //    };
-        //    this.storageBrokerMock.Setup(broker =>
-        //    broker.InsertGuestAsync(randomGuest))
-        //        .ReturnsAsync(randomGuest);
-        //    //Act
-        //    Guest actual = await this.guestService.InsertGuestAsync(randomGuest);
-
-        //    //Assert
-        //    actual.Should().BeEquivalentTo(randomGuest);
-        //}
     }
 }
